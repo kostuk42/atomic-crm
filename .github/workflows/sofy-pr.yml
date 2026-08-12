@@ -14,6 +14,15 @@ jobs:
 
       - name: Run Sofy Web Prompt
         uses: SOFYDEVELOPER/Sofy-Web-Task-Agent@main
+
+        env:
+          project_id: ${{ vars.SOFY_PROJECT_ID }}
+          subscription_key: ${{ secrets.SOFY_SUBS_KEY }}
+          prompt: |
+            Go to https://marmelab.com/atomic-crm-demo/
+
+            Check CRUD for contacts
+
         with:
           project_id: ${{ vars.SOFY_PROJECT_ID }}
           subscription_key: ${{ secrets.SOFY_SUBS_KEY }}
