@@ -12,32 +12,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check Sofy secret availability
-        env:
-          SOFY_SUBS_KEY: ${{ secrets.SOFY_SUBS_KEY }}
-        run: |
-          if [ -z "$SOFY_SUBS_KEY" ]; then
-            echo "SOFY_SUBS_KEY is EMPTY"
-            exit 1
-          else
-            echo "SOFY_SUBS_KEY is available"
-          fi
-
       - name: Run Sofy Web Prompt
         uses: SOFYDEVELOPER/Sofy-Web-Task-Agent@main
 
         env:
           project_id: ${{ vars.SOFY_PROJECT_ID }}
           subscription_key: ${{ secrets.SOFY_SUBS_KEY }}
-          prompt: |
-            Go to https://marmelab.com/atomic-crm-demo/
-
-            Check CRUD for contacts
+          prompt_id: ${{ vars.SOFY_PROMPT_ID }}
 
         with:
           project_id: ${{ vars.SOFY_PROJECT_ID }}
           subscription_key: ${{ secrets.SOFY_SUBS_KEY }}
-          prompt: |
-            Go to https://marmelab.com/atomic-crm-demo/
-
-            Check CRUD for contacts
+          prompt_id: ${{ vars.SOFY_PROMPT_ID }}
