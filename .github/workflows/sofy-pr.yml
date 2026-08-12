@@ -12,6 +12,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Check Sofy secret availability
+        env:
+          SOFY_SUBS_KEY: ${{ secrets.SOFY_SUBS_KEY }}
+        run: |
+          if [ -z "$SOFY_SUBS_KEY" ]; then
+            echo "SOFY_SUBS_KEY is EMPTY"
+            exit 1
+          else
+            echo "SOFY_SUBS_KEY is available"
+          fi
+
       - name: Run Sofy Web Prompt
         uses: SOFYDEVELOPER/Sofy-Web-Task-Agent@main
 
