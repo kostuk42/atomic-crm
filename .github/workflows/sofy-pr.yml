@@ -1,0 +1,23 @@
+name: Sofy PR Tests
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  run-sofy-task:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Sofy Web Prompt
+        uses: SOFYDEVELOPER/Sofy-Web-Task-Agent@main
+        with:
+          project_id: ${{ vars.SOFY_PROJECT_ID }}
+          subscription_key: ${{ secrets.SOFY_SUBS_KEY }}
+          prompt: |
+            Go to https://marmelab.com/atomic-crm-demo/
+
+            Check CRUD for contacts
