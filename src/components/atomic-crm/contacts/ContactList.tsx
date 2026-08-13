@@ -28,6 +28,7 @@ import {
   ContactListFilterSummary,
   ContactListFilter,
 } from "./ContactListFilter";
+import { ContactStats } from "./ContactStats";
 import { TopToolbar } from "../layout/TopToolbar";
 import { InfinitePagination } from "../misc/InfinitePagination";
 import MobileHeader from "../layout/MobileHeader";
@@ -61,12 +62,15 @@ const ContactListLayoutDesktop = () => {
   if (!data?.length && !hasFilters) return <ContactEmpty />;
 
   return (
-    <div className="flex flex-row gap-8">
-      <ContactListFilter />
-      <div className="w-full flex flex-col gap-4">
-        <Card className="py-0">
-          <ContactListContent />
-        </Card>
+    <div className="flex flex-col gap-4">
+      <ContactStats />
+      <div className="flex flex-row gap-8">
+        <ContactListFilter />
+        <div className="w-full flex flex-col gap-4">
+          <Card className="py-0">
+            <ContactListContent />
+          </Card>
+        </div>
       </div>
       <BulkActionsToolbar>
         <ContactBulkActionButtons />
