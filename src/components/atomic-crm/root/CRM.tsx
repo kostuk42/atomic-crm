@@ -30,6 +30,10 @@ import {
   getAuthProvider as defaultAuthProviderBuilder,
   getDataProvider as defaultDataProviderBuilder,
 } from "../providers/supabase";
+import {
+  authProvider as fakeAuthProvider,
+  dataProvider as fakeDataProvider,
+} from "../providers/fakerest";
 import sales from "../sales";
 import { SettingsPageMobile } from "../settings/SettingsPageMobile";
 import { ProfilePage } from "../settings/ProfilePage";
@@ -114,6 +118,21 @@ export type CRMProps = {
  *
  * export default App;
  */
+// Helper to select providers based on environment
+const getDefaultDataProvider = () => {
+  if (import.meta.env.VITE_IS_DEMO === "true") {
+    return fakeDataProvider;
+  }
+  return defaultDataProviderBuilder();
+};
+
+const getDefaultAuthProvider = () => {
+  if (import.meta.env.VITE_IS_DEMO === "true") {
+    return fakeAuthProvider;
+  }
+  return defaultAuthProviderBuilder();
+};
+
 export const CRM = ({
   companySectors = defaultCompanySectors,
   currency = defaultCurrency,
@@ -125,8 +144,8 @@ export const CRM = ({
   noteStatuses = defaultNoteStatuses,
   taskTypes = defaultTaskTypes,
   title = defaultTitle,
-  dataProvider = defaultDataProviderBuilder(),
-  authProvider = defaultAuthProviderBuilder(),
+  dataProvider = getDefaultDataProvider(),
+  authProvider = getDefaultAuthProvider(),
   i18nProvider = defaulti18nProvider,
   store = defaultStore,
   disableTelemetry,
