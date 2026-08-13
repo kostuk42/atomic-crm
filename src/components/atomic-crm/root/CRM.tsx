@@ -119,6 +119,11 @@ export type CRMProps = {
  * export default App;
  */
 // Helper to select providers based on environment
+console.warn(
+  "[CRM] VITE_IS_DEMO:",
+  import.meta.env.VITE_IS_DEMO,
+  typeof import.meta.env.VITE_IS_DEMO,
+);
 const getDefaultDataProvider = () => {
   if (import.meta.env.VITE_IS_DEMO === "true") {
     return fakeDataProvider;
